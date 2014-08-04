@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jiangnan.hibernate.domain">
+    <class name="Student" table="STUDENT">
+        <id name="id" column="STUDENT_ID" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <list name="emails" access="field" check="true" mutable="false" table="EMAIL_LIST" where="1 = 1">
+            <key column="STUDENT_ID" not-null="true" update="false" foreign-key="fk_email_list_001"></key>
+            <list-index column="`ORDER`" base="1"/>
+            <element column="EMAIL" type="string" length="30" not-null="true" unique="true"/>
+        </list>
+        <list name="images" table="IMAGES">
+            <key foreign-key="fk_images_001">
+                <column name="STUDENT_ID" index="index_images_student_id" not-null="true"/>
+            </key>
+            <list-index column="`ORDER`" base="0"/>
+            <composite-element class="com.jiangnan.hibernate.domain.Image">
+                <property name="name" column="IMAGE_NAME" type="string"/>
+                <property name="path" column="IMAGE_PATH" type="string"/>
+                <property name="width" column="IMAGE_WIDTH" type="integer"/>
+                <property name="height" column="IMAGE_HEIGHT" type="integer"/>
+            </composite-element>
+        </list>
+    </class>
+</hibernate-mapping>
