@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jiangnan.hibernate.domain">
+    <class name="Student" table="STUDENT">
+        <!--<id name="id" column="STUDENT_ID" type="long">
+            &lt;!&ndash;<generator class="increment"/>&ndash;&gt;
+            <generator class="identity"/>
+        </id>-->
+        <!--<id name="id" column="STUDENT_ID" type="string">
+            &lt;!&ndash;<generator class="uuid"/>&ndash;&gt;
+            <generator class="uuid">
+                <param name="separator">-</param>
+            </generator>
+        </id>-->
+        <!--<id name="id" column="STUDENT_ID" type="long">
+            <generator class="hilo">
+                <param name="table">high_value</param>
+                <param name="column">next_value</param>
+                <param name="max_lo">4</param>
+            </generator>
+        </id>-->
+        <!--<id name="id" column="STUDENT_ID" type="long">
+            <generator class="native"/>
+        </id>-->
+        <id name="id" column="STUDENT_ID" type="long">
+            <generator class="assigned"/>
+        </id>
+        <property name="name" type="string" column="name"/>
+    </class>
+</hibernate-mapping>
