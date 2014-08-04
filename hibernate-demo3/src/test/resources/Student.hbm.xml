@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "hibernate-demo3/src/test/resources/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jiangnan.hibernate.domain">
+    <class name="Student" table="STUDENT">
+        <id name="id" column="STUDENT_ID" type="long">
+            <generator class="native"/>
+        </id>
+        <!-- 姓名属性,类型为hibernate string,hibernate访问方式为通过field反射,数据库生成的schema上需要有非空约束、唯一性约束和索引 -->
+        <!-- 索引名称为sku_index_name -->
+        <property name="name" type="string" access="field" length="20" not-null="true" unique="true" index="sku_index_name"/>
+        <!-- 性别属性,类型为hibernate char,有非空约束,并且如果没有指定值,hibernate会主动生成 -->
+        <property name="sex" type="char" not-null="true" generated="always">
+            <!-- 通过嵌套的column元素映射列信息,指定性别列默认值为'男' -->
+            <column name="sex" default="'男'"/>
+        </property>
+        <!-- 年龄属性,类型为hibernate short,对应的数据库列名为age -->
+        <property name="age" type="short" column="age"/>
+        <!-- 身高 -->
+        <property name="height" type="integer" column="height"/>
+        <!-- 体重,类型为hibernate float,java类型为Float,precision指定数字中的有效数字为10位,scale指定保留两位有效数字 -->
+        <property name="weight" type="float" column="weight" precision="10" scale="2"/>
+        <!-- 学费,类型为hibernate big_decimal,java类型为BigDecimal,数字部分8位有效数字,小数部分两位有效数字 -->
+        <property name="tuition" type="big_decimal" column="tuition" precision="8" scale="2"/>
+        <!-- 自我介绍,大文本数据映射 -->
+        <property name="selfIntroduction" type="text"/>
+        <!-- 记录状态,布尔值映射 -->
+        <property name="status" type="boolean"/>
+        <!-- 出生时间,时间戳类型 -->
+        <property name="birthTime" type="timestamp" column="birth_time"/>
+        <!-- 入学时间,只保留日期 -->
+        <property name="entranceDay" type="date" column="entrance_day"/>
+        <!-- 记录插入时间,insert="true"表示插入时有效,update="false"表示更新时无效 -->
+        <property name="insertTime" type="timestamp" column="insert_time" insert="true" update="false"/>
+        <!-- 记录更新时间,时间戳 -->
+        <property name="lastUpdate" type="timestamp"/>
+        <!-- 国籍,演示Locale类型的映射 -->
+        <property name="nationality" type="locale"/>
+        <!-- 身高体重比,演示formula使用,数据库表中应该不会有该字段 -->
+        <property name="bmi" type="double" formula="height/weight"/>
+    </class>
+</hibernate-mapping>

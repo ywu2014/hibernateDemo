@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.jiangnan.hibernate.domain">
+    <class name="Student" table="STUDENT">
+        <id name="id" column="STUDENT_ID" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" access="field" length="20" not-null="true" unique="true" unique-key="stu_uk_name" index="sku_index_name"/>
+        <property name="sex" type="char" column="sex" not-null="true"/>
+        <property name="age" type="short" column="age"/>
+        <property name="height" type="integer" column="height"/>
+        <property name="weight" type="float" column="weight" precision="1"/>
+        <property name="tuition" type="double" column="tuition" scale="2"/>
+        <property name="selfIntroduction" type="text"/>
+        <property name="status" type="boolean"/>
+        <property name="birthTime" type="timestamp" column="birth_time"/>
+        <property name="entranceDay" type="date" column="entrance_day"/>
+        <property name="insertTime" type="timestamp" column="insert_time" insert="true" update="false"/>
+        <property name="lastUpdate" type="timestamp" column="last_update" generated="always"/>
+        <property name="nationality" type="locale"/>
+    </class>
+</hibernate-mapping>
